@@ -27,21 +27,21 @@
 	}
 	%>
 	
-	<table width="1000" border="1" cellpadding="0" cellspacing="0">
+	<table width="800" border="1" cellpadding="0" cellspacing="0">
 		<tr height="30">
 			<th bgcolor="skyblue">번호</th>
 			<th bgcolor="skyblue">아이디</th>
 			<th bgcolor="skyblue">글쓴이</th>
-			<th width="600" bgcolor="skyblue">제 목</th>
+			<th width="400" bgcolor="skyblue">제 목</th>
 			<th bgcolor="skyblue">조회수</th>
 			<th bgcolor="skyblue">등록일</th>
 		</tr>
 		<c:forEach items="${list}" var="fbdto">
-			<tr height="30">
+			<tr height="30"  align="center">
 				<td>${fbdto.fnum}</td>
 				<td>${fbdto.fid}</td>
 				<td>${fbdto.fname}</td>
-				<td>${fbdto.ftitle}</td>
+				<td align="left">${fbdto.ftitle}</td>
 				<td>${fbdto.fhit}</td>
 				<td>${fbdto.fdate}</td>
 			</tr>
