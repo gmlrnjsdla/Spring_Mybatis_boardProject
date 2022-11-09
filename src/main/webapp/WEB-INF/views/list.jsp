@@ -31,7 +31,7 @@
 			</tr>
 		</c:forEach>
 		<tr height="30">
-			<td colspan="6" align="right"><a href="writeForm">글쓰기</a></td>
+			<td colspan="6" align="right"><input type="button" value="글쓰기" onclick="javascript:window.location='writeForm'"></td>
 		</tr>
 	</table>
 </body>
