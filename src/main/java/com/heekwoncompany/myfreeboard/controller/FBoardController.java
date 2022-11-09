@@ -1,5 +1,6 @@
 package com.heekwoncompany.myfreeboard.controller;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -80,24 +81,29 @@ public class FBoardController {
 		int checkPwFlag = dao.checkPwDao(mid, mpw);
 		
 		
-		
 		model.addAttribute("mid",mid);
 		model.addAttribute("checkIdFlag", checkIdFlag);
 		model.addAttribute("checkPwFlag", checkPwFlag);
-		
-		if(checkPwFlag == 1) {	// 로그인 성공시 세션에 아이디와 로그인 유효값을 설정
-			HttpSession session =  request.getSession();
-			session.setAttribute("sessionId", mid);
-			session.setAttribute("ValidMem", "yes");
-			
-			MemberDto dto = dao.memberInfoDao(mid);
-			String mname = dto.getMname();
-			
-			model.addAttribute("mname", mname);
-			
+		if(checkIdFlag == 1) {
+			if(checkPwFlag == 1) {	// 로그인 성공시 세션에 아이디와 로그인 유효값을 설정
+				HttpSession session =  request.getSession();
+				session.setAttribute("sessionId", mid);
+				session.setAttribute("ValidMem", "yes");
+				
+				MemberDto dto = dao.memberInfoDao(mid);
+				String mname = dto.getMname();
+				
+				model.addAttribute("mname", mname);
+				
+				return "redirect:list";
+				
+			}else {
+				return "loginOk";
+				}
+		}else {
+			return "loginOk";
 		}
 		
-		return "loginOk";
 	}
 	
 	@RequestMapping(value = "writeForm")
@@ -156,8 +162,23 @@ public class FBoardController {
 	public String list(HttpServletRequest request,Model model) {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
-		ArrayList<FreeBoardDto> dtos = dao.listDao();
 		
+		HttpSession session =  request.getSession();
+		String sid = (String) session.getAttribute("sessionId");
+		String mname = "";
+		
+		if(sid == null) {
+			mname = "로그인을 해주세요.";
+			model.addAttribute("mname", mname);
+			
+		}
+		else {
+			MemberDto dto = dao.memberInfoDao(sid);
+			mname = dto.getMname();
+			model.addAttribute("mname", mname+" 님 어서오세요.");
+			
+		}
+		ArrayList<FreeBoardDto> dtos = dao.listDao();
 		model.addAttribute("list", dtos);
 		
 		return "list";
