@@ -16,5 +16,6 @@ public interface IDao {
 	//----------------------------board 관련 메소드----------------------------//
 	public void writeDao(String mid, String mname, String ftitle, String fcontent);
 	public ArrayList<FreeBoardDto> listDao();
+	public FreeBoardDto contentViewDao(String fnum);
 	
 }

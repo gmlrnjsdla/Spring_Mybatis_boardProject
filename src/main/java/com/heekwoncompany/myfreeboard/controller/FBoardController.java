@@ -25,6 +25,12 @@ public class FBoardController {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@RequestMapping(value="/")
+	public String home() {
+	
+		return "redirect:list";
+	}
 
 	@RequestMapping(value = "joinMember")
 	public String joinMember() {
@@ -182,6 +188,19 @@ public class FBoardController {
 		model.addAttribute("list", dtos);
 		
 		return "list";
+	}
+	
+	@RequestMapping(value = "contentView")
+	public String contentView(HttpServletRequest request,Model model) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		String fnum = request.getParameter("fnum");
+		FreeBoardDto dto = dao.contentViewDao(fnum);
+		
+		model.addAttribute("content", dto);
+		
+		return "contentView";
 	}
 	
 }
