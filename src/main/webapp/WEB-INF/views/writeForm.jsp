@@ -14,7 +14,9 @@
 	이 름 : ${mname} <br><br>
 	제 목 : <input type="text" name="ftitle" size="60"><br><br>
 	내 용 : <textarea rows="10" cols="40" name="fcontent"></textarea><br><br>
-	<input type="submit" value="글쓰기">&nbsp;&nbsp;<input type="reset" value="취소"><br><br>
+	<input type="submit" value="글쓰기">&nbsp;&nbsp;
+	<input type="reset" value="취소">&nbsp;&nbsp;
+	<input type="button" value="목록" onclick="javascript:window.location='redirect:list'"><br><br>
 	</form>
 </body>
 </html>
