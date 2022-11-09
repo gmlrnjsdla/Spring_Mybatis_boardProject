@@ -27,5 +27,9 @@
 	<insert id="writeDao">
 		INSERT INTO freeboard(fnum, fid, fname, ftitle, fcontent, fhit) VALUES(freeboard_seq.nextval,#{param1},#{param2},#{param3},#{param4},0)
 	</insert>
+	
+	<select id="listDao" resultType="com.heekwoncompany.myfreeboard.dto.FreeBoardDto">
+		SELECT * FROM freeboard ORDER BY fnum DESC
+	</select>
 
 </mapper>

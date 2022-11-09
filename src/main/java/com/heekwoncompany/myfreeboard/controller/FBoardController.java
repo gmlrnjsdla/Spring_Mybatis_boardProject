@@ -1,6 +1,6 @@
 package com.heekwoncompany.myfreeboard.controller;
 
-import java.util.Locale;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.heekwoncompany.myfreeboard.dao.mapper.IDao;
+import com.heekwoncompany.myfreeboard.dto.FreeBoardDto;
 import com.heekwoncompany.myfreeboard.dto.MemberDto;
 
 
@@ -149,6 +150,17 @@ public class FBoardController {
 		session.invalidate();
 		
 		return "redirect:list";
+	}
+	
+	@RequestMapping(value = "list")
+	public String list(HttpServletRequest request,Model model) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		ArrayList<FreeBoardDto> dtos = dao.listDao();
+		
+		model.addAttribute("list", dtos);
+		
+		return "list";
 	}
 	
 }
