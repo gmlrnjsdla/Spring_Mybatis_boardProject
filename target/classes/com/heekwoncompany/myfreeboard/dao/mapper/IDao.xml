@@ -17,5 +17,9 @@
 	<select id="checkPwDao" resultType="int">
 		SELECT count(*) FROM member WHERE mid=#{param1} AND mpw=#{param2}
  	</select>
+ 	
+ 	<select id="memberInfoDao" resultType="com.heekwoncompany.myfreeboard.dto.MemberDto">
+ 		SELECT * FROM member WHERE mid=#{param1}
+ 	</select>
 
 </mapper>

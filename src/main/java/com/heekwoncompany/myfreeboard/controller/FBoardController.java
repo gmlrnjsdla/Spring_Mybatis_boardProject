@@ -1,6 +1,7 @@
 package com.heekwoncompany.myfreeboard.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.heekwoncompany.myfreeboard.dao.mapper.IDao;
+import com.heekwoncompany.myfreeboard.dto.MemberDto;
 
 
 
@@ -74,9 +76,23 @@ public class FBoardController {
 		int checkIdFlag = dao.checkIdDao(mid);
 		int checkPwFlag = dao.checkPwDao(mid, mpw);
 		
+		
+		
 		model.addAttribute("mid",mid);
 		model.addAttribute("checkIdFlag", checkIdFlag);
 		model.addAttribute("checkPwFlag", checkPwFlag);
+		
+		if(checkPwFlag == 1) {	// 로그인 성공시 세션에 아이디와 로그인 유효값을 설정
+			HttpSession session =  request.getSession();
+			session.setAttribute("sessionId", mid);
+			session.setAttribute("ValidMem", "yes");
+			
+			MemberDto dto = dao.memberInfoDao(mid);
+			String mname = dto.getMname();
+			
+			model.addAttribute("mname", mname);
+			
+		}
 		
 		return "loginOk";
 	}
