@@ -27,7 +27,7 @@
 	}
 	%>
 	
-	<table width="800" border="1" cellpadding="0" cellspacing="0">
+	<table width="800" border="1" cellpadding="1" cellspacing="0">
 		<tr height="30">
 			<th bgcolor="skyblue">번호</th>
 			<th bgcolor="skyblue">아이디</th>
@@ -41,7 +41,7 @@
 				<td>${fbdto.fnum}</td>
 				<td>${fbdto.fid}</td>
 				<td>${fbdto.fname}</td>
-				<td align="left">${fbdto.ftitle}</td>
+				<td align="left"><a href="contentView?fnum=${fbdto.fnum}">${fbdto.ftitle}</a></td>
 				<td>${fbdto.fhit}</td>
 				<td>${fbdto.fdate}</td>
 			</tr>
