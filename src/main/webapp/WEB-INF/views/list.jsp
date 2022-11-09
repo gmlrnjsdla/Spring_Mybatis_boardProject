@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +13,19 @@
 <body>
 	<h2>글 목록</h2>
 	<hr>
+	<h3><${mname}></h3>
+	<%
+	//Session을 받을때는 값이 null로 올때를 생각해서 조건문을 사용한다.
+	if (session.getAttribute("ValidMem") != null) {
+	%>
+		<input type="button" value="로그아웃" onclick="javascript:window.location='logout'"><br><br>
+	<%
+	}else{
+	%>
+		<input type="button" value="로그인" onclick="javascript:window.location='login'"><br><br>	
+	<%
+	}
+	%>
 	
 	<table width="1000" border="1" cellpadding="0" cellspacing="0">
 		<tr height="30">
