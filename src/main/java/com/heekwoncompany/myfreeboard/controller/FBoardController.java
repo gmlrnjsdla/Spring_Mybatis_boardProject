@@ -106,7 +106,7 @@ public class FBoardController {
 		HttpSession session =  request.getSession();
 		String sid = (String) session.getAttribute("sessionId");
 		
-		if(sid.equals(null)) {
+		if(sid == null) {
 			return "redirect:login";
 		}
 		else {
@@ -139,6 +139,14 @@ public class FBoardController {
 		
 		dao.writeDao(mid, mname, ftitle, fcontent);
 		
+		
+		return "redirect:list";
+	}
+	
+	@RequestMapping(value = "logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session =  request.getSession();
+		session.invalidate();
 		
 		return "redirect:list";
 	}
