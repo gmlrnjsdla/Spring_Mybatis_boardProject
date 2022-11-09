@@ -16,6 +16,7 @@
 				%>
 				<h2>${mid}님 어서오세요.</h2>
 				<h2>회원 이름 : ${mname} 님 </h2>
+				<a href="writeForm">글쓰기</a>
 				<%
 			}else{
 				%>

@@ -1,5 +1,7 @@
 package com.heekwoncompany.myfreeboard.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -95,6 +97,50 @@ public class FBoardController {
 		}
 		
 		return "loginOk";
+	}
+	
+	@RequestMapping(value = "writeForm")
+	public String writeForm(HttpServletRequest request, Model model) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		HttpSession session =  request.getSession();
+		String sid = (String) session.getAttribute("sessionId");
+		
+		if(sid.equals(null)) {
+			return "redirect:login";
+		}
+		else {
+			MemberDto dto = dao.memberInfoDao(sid);
+			String mname = dto.getMname();
+			String mid = dto.getMid();
+			
+			model.addAttribute("mid", mid);
+			model.addAttribute("mname", mname);
+			
+			
+			return "writeForm";
+		}
+	}
+	
+	@RequestMapping(value = "write")
+	public String write(HttpServletRequest request, Model model) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		HttpSession session =  request.getSession();
+		String sid = (String) session.getAttribute("sessionId");
+
+		MemberDto dto = dao.memberInfoDao(sid);
+		
+		String mname = dto.getMname();
+		String mid = dto.getMid();
+		String ftitle = request.getParameter("ftitle");
+		String fcontent = request.getParameter("fcontent");
+		
+		dao.writeDao(mid, mname, ftitle, fcontent);
+		
+		
+		return "redirect:list";
 	}
 	
 }
