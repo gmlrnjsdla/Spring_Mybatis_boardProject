@@ -16,7 +16,7 @@
 	내 용 : <textarea rows="10" cols="40" name="fcontent"></textarea><br><br>
 	<input type="submit" value="글쓰기">&nbsp;&nbsp;
 	<input type="reset" value="취소">&nbsp;&nbsp;
-	<input type="button" value="목록" onclick="javascript:window.location='redirect:list'"><br><br>
+	<input type="button" value="목록" onclick="javascript:window.location='list'"><br><br>
 	</form>
 </body>
 </html>
