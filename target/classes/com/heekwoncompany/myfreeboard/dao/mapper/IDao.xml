@@ -26,6 +26,10 @@
  	<delete id="deleteMemberDao">
  		DELETE FROM member WHERE mid=#{param1}
  	</delete>
+ 	
+ 	<update id="modifyMemberDao">
+		UPDATE member SET mpw=#{param1}, mname=#{param2}, memail=#{param3} WHERE mid=#{param4}
+	</update>
 
 	<!--게시판 관리 SQL-->
 	<insert id="writeDao">
@@ -51,5 +55,7 @@
 	<update id="uphitDao">
 		UPDATE freeboard SET fhit=fhit+1 WHERE fnum=#{param1}
 	</update>
+	
+	
 
 </mapper>

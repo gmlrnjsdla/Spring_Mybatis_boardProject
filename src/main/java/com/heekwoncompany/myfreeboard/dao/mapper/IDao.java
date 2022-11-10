@@ -13,6 +13,7 @@ public interface IDao {
 	public int checkPwDao(String mid, String mpw); // 아이디 ,비밀번호 일치여부
 	public MemberDto memberInfoDao(String mid);
 	public void deleteMemberDao(String mid);
+	public void modifyMemberDao(String mpw, String mname, String memail, String mid);
 	
 	//----------------------------board 관련 메소드----------------------------//
 	public void writeDao(String mid, String mname, String ftitle, String fcontent);

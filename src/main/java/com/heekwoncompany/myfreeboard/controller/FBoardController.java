@@ -91,18 +91,12 @@ public class FBoardController {
 		
 		model.addAttribute("checkIdFlag", checkIdFlag);
 		model.addAttribute("checkPwFlag", checkPwFlag);
+		
 		if(checkIdFlag == 1) {
 			if(checkPwFlag == 1) {	// 로그인 성공시 세션에 아이디와 로그인 유효값을 설정
 				HttpSession session =  request.getSession();
 				session.setAttribute("sessionId", mid);
 				session.setAttribute("ValidMem", "yes");
-				
-				MemberDto dto = dao.memberInfoDao(mid);
-				String mname = dto.getMname();
-				
-				String sid = session.getAttribute("sessionId").toString();
-				model.addAttribute("mid", sid);
-				model.addAttribute("mname", mname);
 				
 				return "redirect:list";
 				
@@ -132,6 +126,32 @@ public class FBoardController {
 		
 		HttpSession session =  request.getSession();
 		session.invalidate();
+		
+		return "redirect:list";
+	}
+	
+	@RequestMapping(value = "modifyMember")
+	public String modifyMember(HttpServletRequest request, Model model) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		String mid = request.getParameter("mid");
+		MemberDto dto = dao.memberInfoDao(mid);
+		
+		model.addAttribute("minfo", dto);
+		
+		return "modifyMember";
+	}
+	
+	@RequestMapping(value = "modifyMemberOk")
+	public String modifyMemberOk(HttpServletRequest request) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		String mid = request.getParameter("mid");
+		String mpw = request.getParameter("mpw");
+		String mname = request.getParameter("mname");
+		String memail = request.getParameter("memail");
+		
+		dao.modifyMemberDao(mpw, mname, memail, mid);
 		
 		return "redirect:list";
 	}
@@ -203,7 +223,9 @@ public class FBoardController {
 		else {
 			MemberDto dto = dao.memberInfoDao(sid);
 			mname = dto.getMname();
+			String mid = dto.getMid();
 			model.addAttribute("mname", mname+" 님 어서오세요.");
+			model.addAttribute("mid", mid);
 			
 		}
 		ArrayList<FreeBoardDto> dtos = dao.listDao();
