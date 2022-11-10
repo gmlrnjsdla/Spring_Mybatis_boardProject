@@ -191,7 +191,7 @@ public class FBoardController {
 	}
 	
 	@RequestMapping(value = "contentView")
-	public String contentView(HttpServletRequest request,Model model) {
+	public String contentView(HttpServletRequest request, Model model) {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
@@ -201,6 +201,29 @@ public class FBoardController {
 		model.addAttribute("content", dto);
 		
 		return "contentView";
+	}
+	
+	@RequestMapping(value = "delete")
+	public String delete(HttpServletRequest request) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		String fnum = request.getParameter("fnum");
+		dao.deleteDao(fnum);
+		
+		return "redirect:list";
+	}
+	
+	@RequestMapping(value = "modify")
+	public String modify(HttpServletRequest request, Model model) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		String fnum = request.getParameter("fnum");
+		FreeBoardDto dto = dao.contentViewDao(fnum);
+		
+		model.addAttribute("content", dto);
+		
+		
+		return "modify";
 	}
 	
 }

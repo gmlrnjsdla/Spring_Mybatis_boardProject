@@ -35,5 +35,9 @@
 	<select id="contentViewDao" resultType="com.heekwoncompany.myfreeboard.dto.FreeBoardDto">
 		SELECT * FROM freeboard WHERE fnum=#{param1}
 	</select>
+	
+	<delete id="deleteDao">
+		DELETE FROM freeboard WHERE fnum=#{param1}
+	</delete>
 
 </mapper>
