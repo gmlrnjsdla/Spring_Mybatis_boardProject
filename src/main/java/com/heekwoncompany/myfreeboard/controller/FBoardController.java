@@ -229,6 +229,9 @@ public class FBoardController {
 			
 		}
 		ArrayList<FreeBoardDto> dtos = dao.listDao();
+		int count = dtos.size();
+		
+		model.addAttribute("count", count);
 		model.addAttribute("list", dtos);
 		
 		return "list";

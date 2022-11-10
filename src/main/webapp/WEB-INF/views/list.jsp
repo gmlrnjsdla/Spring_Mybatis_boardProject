@@ -32,6 +32,7 @@
 	}
 	%>
 	
+	총 게시글 개수 : ${count}개
 	<table width="800" border="1" cellpadding="1" cellspacing="0">
 		<tr height="30">
 			<th bgcolor="skyblue">번호</th>
