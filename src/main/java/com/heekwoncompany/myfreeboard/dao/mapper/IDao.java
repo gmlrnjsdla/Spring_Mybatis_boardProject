@@ -18,5 +18,6 @@ public interface IDao {
 	public ArrayList<FreeBoardDto> listDao();
 	public FreeBoardDto contentViewDao(String fnum);
 	public void deleteDao(String fnum);
+	public void modifyDao(String ftitle, String fcontent, String fnum);
 	
 }

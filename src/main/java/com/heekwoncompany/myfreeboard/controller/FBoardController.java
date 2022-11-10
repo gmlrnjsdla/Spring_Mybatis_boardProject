@@ -218,12 +218,37 @@ public class FBoardController {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		String fnum = request.getParameter("fnum");
-		FreeBoardDto dto = dao.contentViewDao(fnum);
 		
-		model.addAttribute("content", dto);
+		HttpSession session =  request.getSession();
+		String sid = (String) session.getAttribute("sessionId");
+		MemberDto mdto = dao.memberInfoDao(sid);
+		FreeBoardDto fdto = dao.contentViewDao(fnum);
+		model.addAttribute("content", fdto);
 		
+		String mid = mdto.getMid();
+		String fid = fdto.getFid();
 		
-		return "modify";
+		if(mid.equals(fid)) {
+			return "modify";
+		}
+		
+		else {
+			return "redirect:list";
+		}
 	}
+
+	@RequestMapping(value = "modifyOk")
+	public String modifyOk(HttpServletRequest request) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		String fnum = request.getParameter("fnum");
+		String ftitle = request.getParameter("ftitle");
+		String fcontent = request.getParameter("fcontent");
+		
+		dao.modifyDao(ftitle, fcontent, fnum);
+		
+		return "redirect:list";
+	}
+	
 	
 }

@@ -40,8 +40,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="right">
-				<input type="button" value="수정" onclick="jaavascript:window.location='modifyView?fnum=${content.fnum}'">
-				<input type="button" value="삭제" onclick="jaavascript:window.location='delete?fnum=${content.fnum}'">
+				<input type="button" value="수정" onclick="jaavascript:window.location='modify?fnum=${content.fnum}'">
 				<input type="button" value="목록" onclick="jaavascript:window.location='list'">
 			</td>
 		</tr>
