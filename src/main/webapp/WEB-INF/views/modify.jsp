@@ -7,6 +7,21 @@
 <title>글 내용 보기</title>
 </head>
 <body>
+	<%
+		String mid = request.getAttribute("mid").toString();
+		String fid = request.getAttribute("fid").toString();
+		
+		if(!mid.equals(fid)){
+	%>
+			<script language="JavaScript">
+				alert("본인 글만 수정할 수 있습니다!")
+				history.go(-1);
+			</script>
+	<%
+		}
+	%>
+
+
 	<h2>글 내용 보기</h2>
 	<hr>
 	<table width = "500" border = "1" cellspacing="0" cellpadding ="5">

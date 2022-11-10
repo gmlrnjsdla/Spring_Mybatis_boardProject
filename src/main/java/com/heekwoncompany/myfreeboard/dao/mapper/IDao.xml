@@ -43,5 +43,9 @@
 	<update id="modifyDao">
 		UPDATE freeboard SET ftitle=#{param1}, fcontent=#{param2} WHERE fnum=#{param3}
 	</update>
+	
+	<update id="uphitDao">
+		UPDATE freeboard SET fhit=fhit+1 WHERE fnum=#{param1}
+	</update>
 
 </mapper>

@@ -19,5 +19,6 @@ public interface IDao {
 	public FreeBoardDto contentViewDao(String fnum);
 	public void deleteDao(String fnum);
 	public void modifyDao(String ftitle, String fcontent, String fnum);
+	public void uphitDao(String fnum);
 	
 }

@@ -195,7 +195,9 @@ public class FBoardController {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
+		
 		String fnum = request.getParameter("fnum");
+		dao.uphitDao(fnum);
 		FreeBoardDto dto = dao.contentViewDao(fnum);
 		
 		model.addAttribute("content", dto);
@@ -227,14 +229,11 @@ public class FBoardController {
 		
 		String mid = mdto.getMid();
 		String fid = fdto.getFid();
+		model.addAttribute("mid", mid);
+		model.addAttribute("fid", fid);
 		
-		if(mid.equals(fid)) {
-			return "modify";
-		}
 		
-		else {
-			return "redirect:list";
-		}
+		return "modify";
 	}
 
 	@RequestMapping(value = "modifyOk")
