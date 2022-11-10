@@ -22,7 +22,8 @@
 	<%
 	}else{
 	%>
-		<input type="button" value="로그인" onclick="javascript:window.location='login'"><br><br>	
+		<input type="button" value="로그인" onclick="javascript:window.location='login'">&nbsp;&nbsp;	
+		<input type="button" value="회원가입" onclick="javascript:window.location='joinMember'"><br><br>
 	<%
 	}
 	%>

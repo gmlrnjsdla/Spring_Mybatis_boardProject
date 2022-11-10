@@ -8,17 +8,29 @@
 </head>
 <body>
 	<%
-		String mid = request.getAttribute("mid").toString();
-		String fid = request.getAttribute("fid").toString();
 		
-		if(!mid.equals(fid)){
+				
+				String mname = request.getAttribute("mname").toString();
+				if(mname.equals("Guest")){
 	%>
-			<script language="JavaScript">
-				alert("본인 글만 수정할 수 있습니다!")
-				history.go(-1);
-			</script>
+					<script language="JavaScript">
+						alert("로그인 후 이용해주세요!")
+						history.go(-1);
+					</script>
 	<%
-		}
+				}
+				else{
+					String mid = request.getAttribute("mid").toString();
+					String fid = request.getAttribute("fid").toString();
+					if(!mid.equals(fid)){
+	%>
+						<script language="JavaScript">
+							alert("본인 글만 수정할 수 있습니다!")
+							history.go(-1);
+						</script>
+	<%	
+					}
+				}
 	%>
 
 

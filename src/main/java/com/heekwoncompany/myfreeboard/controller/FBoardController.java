@@ -223,17 +223,32 @@ public class FBoardController {
 		
 		HttpSession session =  request.getSession();
 		String sid = (String) session.getAttribute("sessionId");
-		MemberDto mdto = dao.memberInfoDao(sid);
-		FreeBoardDto fdto = dao.contentViewDao(fnum);
-		model.addAttribute("content", fdto);
+		model.addAttribute("sid", sid);
 		
-		String mid = mdto.getMid();
-		String fid = fdto.getFid();
-		model.addAttribute("mid", mid);
-		model.addAttribute("fid", fid);
+		String mname="";
+		
+		if(sid == null) {
+			mname = "Guest";
+			model.addAttribute("mname", mname);
+			
+			return "modify";
+			
+		}else {
+			MemberDto mdto = dao.memberInfoDao(sid);
+			FreeBoardDto fdto = dao.contentViewDao(fnum);
+			model.addAttribute("content", fdto);
+			
+			String mid = mdto.getMid();
+			String fid = fdto.getFid();
+			mname = mdto.getMname();
+			model.addAttribute("mname", mname);
+			model.addAttribute("mid", mid);
+			model.addAttribute("fid", fid);
+			
+			return "modify";
+		}
 		
 		
-		return "modify";
 	}
 
 	@RequestMapping(value = "modifyOk")
