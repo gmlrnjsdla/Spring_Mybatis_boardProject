@@ -22,6 +22,10 @@
  	<select id="memberInfoDao" resultType="com.heekwoncompany.myfreeboard.dto.MemberDto">
  		SELECT * FROM member WHERE mid=#{param1}
  	</select>
+ 	
+ 	<delete id="deleteMemberDao">
+ 		DELETE FROM member WHERE mid=#{param1}
+ 	</delete>
 
 	<!--게시판 관리 SQL-->
 	<insert id="writeDao">

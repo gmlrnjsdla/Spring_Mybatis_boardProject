@@ -32,6 +32,7 @@ public class FBoardController {
 		return "redirect:list";
 	}
 
+	//-----------------------MEMBER 관리-----------------------------// 
 	@RequestMapping(value = "joinMember")
 	public String joinMember() {
 		
@@ -87,7 +88,7 @@ public class FBoardController {
 		int checkPwFlag = dao.checkPwDao(mid, mpw);
 		
 		
-		model.addAttribute("mid",mid);
+		
 		model.addAttribute("checkIdFlag", checkIdFlag);
 		model.addAttribute("checkPwFlag", checkPwFlag);
 		if(checkIdFlag == 1) {
@@ -99,6 +100,8 @@ public class FBoardController {
 				MemberDto dto = dao.memberInfoDao(mid);
 				String mname = dto.getMname();
 				
+				String sid = session.getAttribute("sessionId").toString();
+				model.addAttribute("mid", sid);
 				model.addAttribute("mname", mname);
 				
 				return "redirect:list";
@@ -112,6 +115,32 @@ public class FBoardController {
 		
 	}
 	
+	@RequestMapping(value = "logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session =  request.getSession();
+		session.invalidate();
+		
+		return "redirect:list";
+	}
+	
+	@RequestMapping(value = "deleteMember")
+	public String deleteMember(HttpServletRequest request) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		String mid = request.getParameter("mid");
+		dao.deleteMemberDao(mid);
+		
+		HttpSession session =  request.getSession();
+		session.invalidate();
+		
+		return "redirect:list";
+	}
+	
+	
+	//-----------------------MEMBER 관리-----------------------------//
+	
+	
+	//-----------------------FREEBOARD 관리-----------------------------//
 	@RequestMapping(value = "writeForm")
 	public String writeForm(HttpServletRequest request, Model model) {
 		
@@ -156,13 +185,6 @@ public class FBoardController {
 		return "redirect:list";
 	}
 	
-	@RequestMapping(value = "logout")
-	public String logout(HttpServletRequest request) {
-		HttpSession session =  request.getSession();
-		session.invalidate();
-		
-		return "redirect:list";
-	}
 	
 	@RequestMapping(value = "list")
 	public String list(HttpServletRequest request,Model model) {
@@ -264,5 +286,7 @@ public class FBoardController {
 		return "redirect:list";
 	}
 	
+	
+	//-----------------------FREEBOARD 관리-----------------------------//
 	
 }
