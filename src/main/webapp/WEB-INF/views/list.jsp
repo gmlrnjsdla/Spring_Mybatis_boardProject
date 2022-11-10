@@ -17,7 +17,8 @@
 	
 	<%
 	//Session을 받을때는 값이 null로 올때를 생각해서 조건문을 사용한다.
-	if (session.getAttribute("ValidMem") != null) {
+	String sid = (String) session.getAttribute("sessionId");
+	if (sid != null) {
 	%>
 		<input type="button" value="로그아웃" onclick="javascript:window.location='logout'">&nbsp;&nbsp;
 		<input type="button" value="정보수정" onclick="javascript:window.location='modifyMember?mid=${mid}'">

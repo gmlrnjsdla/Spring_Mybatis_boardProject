@@ -213,6 +213,8 @@ public class FBoardController {
 		
 		HttpSession session =  request.getSession();
 		String sid = (String) session.getAttribute("sessionId");
+		
+		
 		String mname = "";
 		
 		if(sid == null) {
